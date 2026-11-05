@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OFFDUTY</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfaf8;--ink:#1b1b1b;--mut:#6b6761;--line:#e3dfd8;--card:#f1eeea;--acc:#c0262d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141414;--ink:#f2efe9;--mut:#a29d94;--line:#333;--card:#222;--acc:#e5484d;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:64px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Helvetica Neue",Arial,sans-serif}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.serif{font-family:"Cormorant Garamond",Georgia,serif}
+.bar{background:var(--ink);color:var(--bg);text-align:center;font-size:12px;padding:7px 12px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:10px 16px}
+.logo{font-size:30px;font-weight:700;letter-spacing:.04em;text-decoration:none;color:var(--ink)}
+.ib{background:none;border:0;font-size:14px;padding:6px 0}
+.right{text-align:right}
+.hero{position:relative;height:min(82vh,780px);min-height:460px;background:var(--card) center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:36px 20px 44px;text-align:center}
+.hero h1{font-size:clamp(44px,11vw,104px);line-height:.95;margin:0;letter-spacing:.02em;font-weight:500}
+.hero.ph{color:var(--ink)}.hero.has{color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.35)}
+.hero .hint{font-size:13px;color:var(--mut);align-self:center}
+.btn{background:#fff;color:#1b1b1b;border:0;padding:13px 34px;font-weight:600;letter-spacing:.06em;text-decoration:none;display:inline-block;font-size:13px}
+.btn.dk{background:var(--ink);color:var(--bg)}
+.intro{max-width:620px;margin:0 auto;padding:44px 22px;text-align:center}
+.intro h2{font-size:32px;margin:0 0 8px;font-weight:700}
+.intro p{color:var(--mut);margin:0}
+.sec{padding:8px 0 40px}
+.sec>h2{text-align:center;font-size:32px;margin:0 0 14px;font-weight:700}
+.bar2{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-block:1px solid var(--line);font-size:13px;gap:8px;flex-wrap:wrap}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:5px 14px;font-size:13px}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 6px;padding:14px 6px;max-width:1200px;margin:auto}
+@media(min-width:720px){.grid{grid-template-columns:repeat(4,1fr);gap:24px 12px}}
+.tile{aspect-ratio:3/4;background-color:var(--card);background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:12px;font-weight:700;font-size:22px;letter-spacing:.02em;transition:background-color .2s}
+.info{padding:0 6px}
+.name{font-weight:600;margin-top:8px;font-size:14px}
+.fab{font-size:12px;color:var(--mut)}
+.sw{display:flex;gap:7px;margin:6px 0}
+.dot{width:22px;height:22px;border-radius:50%;border:1px solid var(--mut);padding:0}
+.dot[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+.row{display:flex;gap:6px;margin-top:6px}
+select{flex:1;min-width:0;padding:8px;border:1px solid var(--line);background:var(--bg);border-radius:0}
+.add{flex:2;background:var(--ink);color:var(--bg);border:0;padding:8px;font-size:13px}
+.up{display:none;margin-top:6px;font-size:12px;text-decoration:underline;cursor:pointer}
+.edit .up{display:block}
+.editbar{display:none;background:var(--acc);color:#fff;text-align:center;font-size:13px;padding:8px}
+.edit .editbar{display:block}
+footer{background:var(--card);padding:32px 20px;text-align:center;font-size:13px;color:var(--mut)}
+footer a{color:var(--ink);margin:0 10px;text-decoration:none}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:20}.ov.on{display:block}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(440px,100%);background:var(--bg);padding:20px;overflow:auto;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+.panel.l{left:0;right:auto;width:min(340px,88%)}
+.menu a{display:block;font-size:20px;padding:10px 0;color:var(--ink);text-decoration:none;letter-spacing:.03em}
+.menu hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.menu .s{font-size:13px;color:var(--mut)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.x{background:none;border:0;font-size:26px;line-height:1}
+.item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.item .sq{width:54px;height:66px;flex:none;border:1px solid var(--line);background-size:cover;background-position:center}
+.qty button{width:26px;height:26px;border:1px solid var(--line);background:var(--bg);border-radius:50%}
+.tot{display:flex;justify-content:space-between;margin:6px 0}
+label{display:block;font-size:13px;color:var(--mut);margin-top:10px}
+input[type=text],input[type=tel],input[type=email]{width:100%;padding:10px;border:1px solid var(--line);background:var(--bg);border-radius:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pay{display:flex;gap:10px;align-items:center;border:1px solid var(--line);padding:12px;margin-top:8px;cursor:pointer}
+.pay.sel{border-color:var(--ink);outline:1px solid var(--ink)}
+.brands span{font-size:11px;font-weight:700;border:1px solid var(--mut);padding:1px 6px;margin-right:4px}
+.err{color:var(--acc);font-size:13px;min-height:18px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="editbar">Edit mode: use “Change photo” on the hero and each product. Photos save in this browser only. Send your final photos to be placed permanently.</div>
+<div class="bar">Free delivery over Rs. 15,000 · Cash on delivery · Visa &amp; Mastercard</div>
+<header>
+  <button class="ib" id="menu" aria-label="Open menu">☰ Menu</button>
+  <a class="logo serif" href="#top">OFFDUTY</a>
+  <div class="right"><button class="ib" id="open" aria-label="Open bag">Bag (<span id="cnt">0</span>)</button></div>
+</header>
+
+<section class="hero ph" id="hero">
+  <h1 class="serif">Off duty,<br>on repeat.</h1>
+  <div><a class="btn" href="#new">SHOP NOW</a>
+  <label class="up" style="color:inherit;margin-top:14px">Change hero photo<input type="file" accept="image/*" hidden data-img="hero"></label></div>
+</section>
+
+<section class="intro" id="about">
+  <h2 class="serif">About OFFDUTY</h2>
+  <p>OFFDUTY is a Sri Lankan clothing brand for the hours after work. Soft knits, easy cotton and relaxed fits, made to be lived in all day.</p>
+</section>
+
+<section class="sec" id="new">
+  <h2 class="serif">New arrivals</h2>
+  <div class="bar2"><div class="chips" id="filters"></div><span id="count"></span></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer id="contact">
+  <p><a href="#new">Shop</a><a href="#about">About us</a><a href="#contact">Contact us</a></p>
+  <p>hello@offduty.lk · Instagram @offduty</p>
+  <p>© 2026 OFFDUTY. Prices in LKR.</p>
+</footer>
+
+<div class="ov" id="menuov"><div class="panel l menu" role="dialog" aria-label="Menu">
+  <div class="top"><span class="serif" style="font-size:24px;font-weight:700">OFFDUTY</span><button class="x" data-close aria-label="Close">×</button></div>
+  <a href="#new" data-nav="All">New arrivals</a><a href="#new" data-nav="Tops">Tops</a><a href="#new" data-nav="Trousers">Trousers</a><a href="#new" data-nav="Shorts">Shorts</a>
+  <hr><a class="s" href="#about" data-nav="">About us</a><a class="s" href="#contact" data-nav="">Contact us</a>
+</div></div>
+<div class="ov" id="cartov"><div class="panel" role="dialog" aria-label="Your bag">
+  <div class="top"><h2 style="margin:0" class="serif">Your bag</h2><button class="x" data-close aria-label="Close">×</button></div><div id="cartbody"></div></div></div>
+<div class="ov" id="coov"><div class="panel" role="dialog" aria-label="Checkout">
+  <div class="top"><h2 style="margin:0" class="serif">Checkout</h2><button class="x" data-close aria-label="Close">×</button></div><div id="cobody"></div></div></div>
+
+<script>
+const $=s=>document.querySelector(s),money=n=>"Rs. "+n.toLocaleString("en-LK");
+const C={White:"#f4f1ec",Black:"#1b1b1b",Red:"#c0262d",Brown:"#5a3a2e",Cream:"#eadfc6","Light Pink":"#f3c9d2",Beige:"#cdb99a","Olive Green":"#6b6b3a",Pink:"#ee9bb3"};
+const P=[
+{id:1,n:"Sleek Belle V Neck Tank",t:"Tops",p:3490,f:"87% polyamide, 13% elastane jersey",v:[["White"],["Black"],["Red"]]},
+{id:2,n:"V Neck Knit Long Sleeve Top",t:"Tops",p:4290,f:"87% polyamide, 13% elastane jersey",v:[["Brown"],["Black"],["Cream"]]},
+{id:3,n:"Sleek Shay Short Sleeve",t:"Tops",p:3290,f:"80% viscose, 20% polyester knit",v:[["Black"],["Red"],["Light Pink"]]},
+{id:8,n:"Contour Baby Tee",t:"Tops",p:2990,f:"95% cotton, 5% elastane jersey",v:[["Red","Blue letters","#2f5fd0"],["Pink","Yellow letters","#f2c230"],["White","Green letters","#2e8b4f"]]},
+{id:4,n:"Woven Stripe Straight Leg Jogger",t:"Trousers",p:5990,f:"100% woven polyester",v:[["Black","White stripes","#fff"],["Black","Pink stripes","#ee9bb3"],["Black","Red stripes","#c0262d"]]},
+{id:5,n:"Cotton Wide Leg Cargo Pant",t:"Trousers",p:6490,f:"Cotton twill",v:[["Cream"],["Black"]]},
+{id:6,n:"Lace-Up Wide Leg Trouser",t:"Trousers",p:6290,f:"97% cotton, 3% elastane stretch twill",v:[["Beige"],["Olive Green"]]},
+{id:7,n:"Essential Cotton Mini Shorts",t:"Shorts",p:3990,f:"97% cotton, 3% elastane stretch twill",v:[["Beige"],["White"]]}];
+const lbl=v=>v[1]?v[0]+" with "+v[1].toLowerCase():v[0];
+const lum=h=>{h=h.replace("#","");return(parseInt(h.substr(0,2),16)*299+parseInt(h.substr(2,2),16)*587+parseInt(h.substr(4,2),16)*114)/1000};
+function bg(v){const b=C[v[0]];if(v[1]&&v[1].includes("stripes"))return `linear-gradient(90deg,transparent 0 22%,${v[2]} 22% 25%,transparent 25% 75%,${v[2]} 75% 78%,transparent 78%),${b}`;return b}
+function tc(v){if(v[1]&&v[1].includes("letters"))return v[2];if(v[1])return"#f4f1ec";return lum(C[v[0]])>140?"#1b1b1b":"#f4f1ec"}
+let cart=[],sel={},filter="All",imgs={};
+try{cart=JSON.parse(localStorage.getItem("od-cart")||"[]");imgs=JSON.parse(localStorage.getItem("od-img")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("od-cart",JSON.stringify(cart))}catch(e){}};
+const find=id=>P.find(p=>p.id==id);
+function hero(){const h=$("#hero");if(imgs.hero){h.style.backgroundImage=`url(${imgs.hero})`;h.className="hero has"}else{h.style.backgroundImage="";h.className="hero ph"}}
+function filters(){$("#filters").innerHTML=["All","Tops","Trousers","Shorts"].map(f=>`<button class="chip" aria-pressed="${f==filter}" data-f="${f}">${f}</button>`).join("")}
+function grid(){const L=P.filter(p=>filter=="All"||p.t==filter);$("#count").textContent=L.length+" styles";
+ $("#grid").innerHTML=L.map(p=>{const i=sel[p.id]||0,v=p.v[i],im=imgs["p"+p.id+"c"+i]||imgs["p"+p.id];
+ return `<article><div class="tile" style="background-color:${im?"transparent":C[v[0]]};background-image:${im?`url(${im})`:bg(v)};color:${tc(v)}">${im?"":"OFFDUTY"}</div>
+ <div class="info"><label class="up">Change photo<input type="file" accept="image/*" hidden data-img="p${p.id}c${i}"></label>
+ <div class="name">${p.n}</div><div class="fab">${p.f}</div><div style="margin:2px 0">${money(p.p)}</div>
+ <div class="sw" role="group" aria-label="Colour">${p.v.map((x,j)=>`<button class="dot" title="${lbl(x)}" aria-label="${lbl(x)}" aria-pressed="${j==i}" data-p="${p.id}" data-c="${j}" style="background:${bg(x)}"></button>`).join("")}</div>
+ <div class="fab">${lbl(v)}</div>
+ <div class="row"><select id="s${p.id}" aria-label="Size">${["XS","S","M","L","XL"].map(s=>`<option>${s}</option>`).join("")}</select><button class="add" data-add="${p.id}">Add to bag</button></div></div></article>`}).join("")}
+const sub=()=>cart.reduce((a,i)=>a+find(i.id).p*i.q,0),ship=()=>sub()>=15000||!sub()?0:450;
+function cartUI(){$("#cnt").textContent=cart.reduce((a,i)=>a+i.q,0);const b=$("#cartbody");
+ if(!cart.length){b.innerHTML=`<p>Your bag is empty.</p><button class="btn dk" data-close>Keep shopping</button>`;return}
+ b.innerHTML=cart.map((i,k)=>{const p=find(i.id),v=p.v[i.c],im=imgs["p"+p.id+"c"+i.c]||imgs["p"+p.id];return `<div class="item"><div class="sq" style="background-color:${C[v[0]]};background-image:${im?`url(${im})`:bg(v)}"></div><div style="flex:1"><b>${p.n}</b><br>${lbl(v)} · ${i.s}<br>${money(p.p)}
+ <div class="qty"><button data-q="${k}" data-d="-1" aria-label="Less">−</button> ${i.q} <button data-q="${k}" data-d="1" aria-label="More">+</button> <button class="x" style="font-size:13px;margin-left:8px;text-decoration:underline" data-rm="${k}">Remove</button></div></div></div>`}).join("")+
+ `<div class="tot" style="margin-top:14px"><span>Subtotal</span><span>${money(sub())}</span></div><div class="tot"><span>Delivery</span><span>${ship()?money(ship()):"Free"}</span></div>
+ <div class="tot"><b>Total</b><b>${money(sub()+ship())}</b></div><button class="btn dk" style="width:100%;margin-top:12px" id="go">CHECKOUT</button>`}
+function checkout(){$("#cobody").innerHTML=`<div class="two"><div><label>Full name</label><input type="text" id="nm" autocomplete="name"></div><div><label>Mobile number</label><input type="tel" id="ph" placeholder="07X XXX XXXX" autocomplete="tel"></div></div>
+ <label>Email</label><input type="email" id="em" autocomplete="email"><label>Delivery address</label><input type="text" id="ad" autocomplete="street-address">
+ <div class="two"><div><label>City</label><input type="text" id="ct"></div><div><label>District</label><input type="text" id="di" placeholder="e.g. Kurunegala"></div></div>
+ <h3 style="margin:18px 0 0">Payment</h3>
+ <label class="pay sel" id="pcard"><input type="radio" name="pm" value="card" checked><span><b>Credit or debit card</b><br><span class="brands"><span>VISA</span><span>Mastercard</span></span></span></label>
+ <div id="cardf"><label>Card number</label><input type="text" id="cn" inputmode="numeric" placeholder="1234 5678 9012 3456" autocomplete="cc-number"><div class="two"><div><label>Expiry (MM/YY)</label><input type="text" id="ce" placeholder="MM/YY" autocomplete="cc-exp"></div><div><label>CVV</label><input type="text" id="cv" inputmode="numeric" placeholder="123" autocomplete="cc-csc"></div></div></div>
+ <label class="pay" id="pcod"><input type="radio" name="pm" value="cod"><span><b>Cash on delivery</b><br><span class="fab">Pay the courier when your order arrives</span></span></label>
+ <div class="tot" style="margin-top:16px"><b>Total</b><b>${money(sub()+ship())}</b></div><div class="err" id="err" role="alert"></div><button class="btn dk" style="width:100%" id="place">PLACE ORDER</button>`}
+const pm=()=>document.querySelector('input[name=pm]:checked').value;
+function place(){const g=id=>$(id).value.trim(),e=m=>{$("#err").textContent=m;return 0};
+ if(!g("#nm")||!g("#ad")||!g("#ct")||!g("#di"))return e("Enter your name, address, city and district.");
+ if(!/^(\+94|0)?7\d{8}$/.test(g("#ph").replace(/[\s-]/g,"")))return e("Enter a valid Sri Lankan mobile number, like 0771234567.");
+ if(!/^\S+@\S+\.\S+$/.test(g("#em")))return e("Enter a valid email address.");
+ if(pm()=="card"){const n=g("#cn").replace(/\s/g,"");
+  if(!/^(4\d{12}(\d{3})?|5[1-5]\d{14}|2[2-7]\d{14})$/.test(n))return e("We accept Visa and Mastercard only. Check the card number.");
+  if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(g("#ce")))return e("Enter expiry as MM/YY.");
+  if(!/^\d{3}$/.test(g("#cv")))return e("Enter the 3-digit CVV.")}
+ const ref="OD"+Math.floor(100000+Math.random()*900000),cod=pm()=="cod",tot=money(sub()+ship());cart=[];save();cartUI();
+ $("#cobody").innerHTML=`<h2 class="serif">Thank you, ${g("#nm").split(" ")[0]}.</h2><p>Order <b>${ref}</b> is placed. We’ll send updates to ${g("#em")}.</p><p>${cod?`Please have <b>${tot}</b> ready to pay the courier on delivery.`:`Your card payment of <b>${tot}</b> was received.`}</p><button class="btn dk" data-close>Back to shop</button>`}
+function shrink(file,key){const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+ imgs[key]=c.toDataURL("image/jpeg",.72);try{localStorage.setItem("od-img",JSON.stringify(imgs))}catch(e){alert("Browser storage is full. Try a smaller photo.")}hero();grid();cartUI()};im.src=r.result};r.readAsDataURL(file)}
+document.addEventListener("change",e=>{const k=e.target.dataset&&e.target.dataset.img;if(k&&e.target.files[0])shrink(e.target.files[0],k)});
+const closeAll=()=>document.querySelectorAll(".ov").forEach(o=>o.classList.remove("on"));
+document.addEventListener("click",e=>{const t=e.target.closest("button,label,a,[data-close]");if(!t)return;const d=t.dataset;
+ if(d.nav!==undefined){if(d.nav){filter=d.nav;filters();grid()}closeAll()}
+ else if(d.f){filter=d.f;filters();grid()}
+ else if(d.c!==undefined){sel[d.p]=+d.c;grid()}
+ else if(d.add){const p=find(d.add),c=sel[p.id]||0,s=$("#s"+p.id).value,x=cart.find(i=>i.id==p.id&&i.c==c&&i.s==s);x?x.q++:cart.push({id:p.id,c,s,q:1});save();cartUI();$("#cartov").classList.add("on")}
+ else if(d.q!==undefined){cart[d.q].q+=+d.d;if(cart[d.q].q<1)cart.splice(d.q,1);save();cartUI()}
+ else if(d.rm!==undefined){cart.splice(d.rm,1);save();cartUI()}
+ else if(t.id=="menu")$("#menuov").classList.add("on");
+ else if(t.id=="open"){cartUI();$("#cartov").classList.add("on")}
+ else if(t.id=="go"){$("#cartov").classList.remove("on");checkout();$("#coov").classList.add("on")}
+ else if(t.id=="place")place();
+ else if(t.id=="pcard"||t.id=="pcod"){setTimeout(()=>{$("#pcard").classList.toggle("sel",pm()=="card");$("#pcod").classList.toggle("sel",pm()=="cod");$("#cardf").style.display=pm()=="card"?"block":"none"})}
+ else if(d.close!==undefined||t.classList.contains("x"))closeAll()});
+document.querySelectorAll(".ov").forEach(o=>o.addEventListener("click",e=>{if(e.target==o)o.classList.remove("on")}));
+document.addEventListener("keydown",e=>{if(e.key=="Escape")closeAll()});
+const ed=()=>document.body.classList.toggle("edit",location.hash=="#edit");addEventListener("hashchange",ed);ed();
+hero();filters();grid();cartUI();
+</script>
+</body>
+</html>
